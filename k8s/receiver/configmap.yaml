@@ -1,3 +1,4 @@
+#@ load("@ytt:data", "data")
 kind: ConfigMap
 apiVersion: v1
 metadata:
@@ -5,7 +6,8 @@ metadata:
 data:
   SPRING_PROFILES_ACTIVE: receiver
   SPRING_RABBITMQ_HOST: tanzu-messaging-dc-rabbitmq.datacenter-database.svc.cluster.local
-  SPRING_RABBITMQ_PASSWORD: jaHiKxZ5KZ 
+  SPRING_RABBITMQ_PASSWORD: #@ data.values.rabbitmq_password
   SPRING_DATASOURCE_USERNAME: tanzu
   SPRING_DATASOURCE_PASSWORD: tanzu
-  SPRING_DATASOURCE_URL: "jdbc:postgresql://tanzu-database.datacenter-database.svc.cluster.local:5432/tanzu-po"
+  SPRING_DATASOURCE_URL: "jdbc:postgresql://tanzu-database-postgresql.datacenter-database.svc.cluster.local:5432/tanzu-pos"
+  MANAGEMENT_METRICS_EXPORT_WAVEFRONT_URI: #@ data.values.wavefrontProxyUri

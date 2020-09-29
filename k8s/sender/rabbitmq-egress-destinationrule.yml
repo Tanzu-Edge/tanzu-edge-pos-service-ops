@@ -3,7 +3,7 @@ kind: "DestinationRule"
 metadata:
   name: external-rabbitmq
 spec:
-  host: "*.database.svc.cluster.local"
+  host: "*.edge-data-services.svc.cluster.local"
   trafficPolicy:
     tls:
       mode: DISABLE
