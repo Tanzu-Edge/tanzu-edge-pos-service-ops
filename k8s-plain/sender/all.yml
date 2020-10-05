@@ -1,0 +1,102 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: pos-sender-config
+data:
+  SPRING_PROFILES_ACTIVE: sender
+  POS_STOREID: store-10
+  SPRING_RABBITMQ_HOST: tanzu-messaging-rabbitmq.edge-data-services.svc.cluster.local
+  SPRING_RABBITMQ_PASSWORD: tanzu
+  MANAGEMENT_METRICS_EXPORT_WAVEFRONT_URI: proxy://wavefront-proxy-tanzu.tanzu-observability-saas:2878
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pos-sender
+  annotations:
+    traffic.sidecar.istio.io/excludeOutboundPorts: 5678,5433
+spec:
+  selector:
+    matchLabels:
+      app: pos-sender
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: pos-sender
+    spec:
+      containers:
+      - name: sender
+        image: harbor.edge-10.customer0.io/tbs-tanzu-pos-service/pos-service@
+        ports:
+        - containerPort: 8080
+          name: server
+        - containerPort: 8081
+          name: management
+        envFrom:
+        - configMapRef:
+            name: pos-sender-config
+      imagePullSecrets:
+      - name: harbor-regcred
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: external-rabbitmq
+spec:
+  host: '*.edge-data-services.svc.cluster.local'
+  trafficPolicy:
+    tls:
+      mode: DISABLE
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: pos-sender-gateway
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    tls:
+      mode: PASSTHROUGH
+    hosts:
+    - pos-sender.services.edge.wrightcode.io
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: pos-sender-service
+spec:
+  hosts:
+  - pos-sender.services.edge.wrightcode.io
+  gateways:
+  - pos-sender-gateway
+  http:
+  - match:
+    - uri:
+        prefix: /
+    route:
+    - destination:
+        host: pos-sender-service
+        port:
+          number: 8090
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: pos-sender-service
+spec:
+  ports:
+  - port: 8090
+    targetPort: 8080
+    name: http
+  - port: 8091
+    targetPort: 8081
+    name: management
+  selector:
+    app: pos-sender
+  type: ClusterIP
