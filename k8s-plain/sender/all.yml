@@ -27,7 +27,7 @@ spec:
     spec:
       containers:
       - name: sender
-        image: harbor.edge-10.customer0.io/tbs-tanzu-pos-service/pos-service@
+        image: harbor.edge-10.customer0.io/tbs-tanzu-pos-service/pos-service@sha256:389cd26180a6f80701825479eef489220f5db57d53f1dfe4fc27dab2e151d982
         ports:
         - containerPort: 8080
           name: server
