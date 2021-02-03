@@ -5,4 +5,7 @@ image: harbor.edge-mgmt.customer0.io/tas-apps/8266f0f3-3eb0-4bf3-a280-684ffa87c0
 ingressDomain: site-0.storm.pvd.pez.pivotal.io
 wavefrontProxyUri: proxy://wavefront-proxy-tanzu.tanzu-observability-saas:2878
 rabbitmq_password: replace_me
-postgresql_host: tanzu-database-postgresql.datacenter-database.svc.cluster.local
+rabbitmq_username: whoami
+postgresql_password: replace_me
+postgresql_username: whoami
+postgresql_host: dc-pos-sql.dc-data-services.svc.cluster.local

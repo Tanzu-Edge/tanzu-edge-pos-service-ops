@@ -7,7 +7,8 @@ data:
   SPRING_PROFILES_ACTIVE: receiver
   SPRING_RABBITMQ_HOST: tanzu-messaging-dc-rabbitmq.datacenter-database.svc.cluster.local
   SPRING_RABBITMQ_PASSWORD: #@ data.values.rabbitmq_password
-  SPRING_DATASOURCE_USERNAME: tanzu
-  SPRING_DATASOURCE_PASSWORD: tanzu
-  SPRING_DATASOURCE_URL: "jdbc:postgresql://tanzu-database-postgresql.datacenter-database.svc.cluster.local:5432/tanzu-pos"
+  SPRING_RABBITMQ_USERNAME: #@ data.values.rabbitmq_username
+  SPRING_DATASOURCE_USERNAME: #@ data.values.postgresql_username
+  SPRING_DATASOURCE_PASSWORD: #@ data.values.postgresql_password
+  SPRING_DATASOURCE_URL: "jdbc:postgresql://dc-pos-sql.dc-data-services.svc.cluster.local:5432/pos"
   MANAGEMENT_METRICS_EXPORT_WAVEFRONT_URI: #@ data.values.wavefrontProxyUri
