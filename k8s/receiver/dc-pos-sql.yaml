@@ -1,0 +1,17 @@
+apiVersion: sql.tanzu.vmware.com/v1
+kind: Postgres
+metadata:
+  name: dc-pos-sql
+spec:
+  memory: 800Mi
+  cpu: "0.8"
+  storageClassName: default
+  storageSize: 10G
+  pgConfig:
+     dbname: pos
+     username: tanzu
+  serviceType: ClusterIP
+  highAvailability:
+     enabled: false
+  backupLocationSecret:
+     name:
