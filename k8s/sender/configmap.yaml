@@ -6,6 +6,7 @@ metadata:
 data:
   SPRING_PROFILES_ACTIVE: sender
   POS_STOREID: #@ data.values.storeId
-  SPRING_RABBITMQ_HOST: tanzu-messaging-rabbitmq.edge-data-services.svc.cluster.local
+  SPRING_RABBITMQ_HOST: edge-pos-messaging.edge-data-services.svc.cluster.local
   SPRING_RABBITMQ_PASSWORD: #@ data.values.rabbitmq_password
+  SPRING_RABBITMQ_USERNAME: #@ data.values.rabbitmq_username
   MANAGEMENT_METRICS_EXPORT_WAVEFRONT_URI: #@ data.values.wavefrontProxyUri
