@@ -10,6 +10,7 @@ kubectl create namespace dc-store
 kubectl create -f $RABBIT_OPERATOR_MANIFEST
 echo "waiting 60s for rabbit operator to start..."
 sleep 60
+kubectl -n dc-data-services create configmap definitions --from-file='def.json=../k8s/sender/rabbit-definitions.json'
 kubectl create -f dc-pos-messaging.yaml -n dc-data-services
 
 EDGE_RMQ_USERNAME=$(kubectl -n dc-data-services get secret dc-pos-messaging-default-user -o jsonpath='{.data.username}' | base64 --decode)
