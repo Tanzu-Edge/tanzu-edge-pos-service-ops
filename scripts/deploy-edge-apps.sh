@@ -10,6 +10,7 @@ kubectl create namespace edge-store
 kubectl create -f $RABBIT_OPERATOR_MANIFEST
 echo "waiting 60s for rabbit operator to start..."
 sleep 60
+kubectl -n edge-data-services create configmap definitions --from-file='def.json=../k8s/sender/rabbit-definitions.json'
 kubectl create -f edge-pos-messaging.yaml -n edge-data-services
 
 EDGE_RMQ_USERNAME=$(kubectl -n edge-data-services get secret edge-pos-messaging-default-user -o jsonpath='{.data.username}' | base64 --decode)

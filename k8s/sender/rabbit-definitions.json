@@ -1,0 +1,52 @@
+{
+   "bindings":[
+      {
+         "arguments":{
+            
+         },
+         "destination":"pos-txns",
+         "destination_type":"queue",
+         "routing_key":"store.id.#",
+         "source":"pos-exchange",
+         "vhost":"/"
+      }
+   ],
+   "exchanges":[
+      {
+         "arguments":{
+            
+         },
+         "auto_delete":false,
+         "durable":true,
+         "name":"pos-exchange",
+         "type":"direct",
+         "vhost":"/"
+      }
+   ],
+   "queues":[
+      {
+         "arguments":{
+            "x-queue-type":"classic"
+         },
+         "auto_delete":false,
+         "durable":true,
+         "name":"pos-txns",
+         "type":"classic",
+         "vhost":"/"
+      }
+   ],
+   "vhosts":[
+      {
+         "limits":[
+
+         ],
+         "metadata":{
+            "description":"Tanzu Store Messaging",
+            "tags":[
+
+            ]
+         },
+         "name":"/"
+      }
+   ]
+}
