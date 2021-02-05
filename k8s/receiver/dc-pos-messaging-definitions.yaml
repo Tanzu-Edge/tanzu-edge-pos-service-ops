@@ -1,0 +1,30 @@
+apiVersion: rabbitmq.com/v1beta1
+kind: RabbitmqCluster
+metadata:
+  name: dc-pos-messaging
+spec:
+  replicas: 1
+  service:
+    type: NodePort
+  persistence:
+    storageClassName: default
+  override:
+    statefulSet:
+      spec:
+        template:
+          spec:
+            containers:
+            - name: rabbitmq
+              volumeMounts:
+              - mountPath: /path/to/exported/
+                name: definitions
+            volumes:
+            - name: definitions
+              configMap:
+                name: definitions # Name of the ConfigMap which contains definitions you wish to import
+  rabbitmq:
+    additionalPlugins:
+      - rabbitmq_federation
+      - rabbitmq_federation_management
+    additionalConfig: |
+      load_definitions = /path/to/exported/def.json # Path to the mounted definitions file
