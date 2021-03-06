@@ -1,0 +1,29 @@
+#@ load("@ytt:data", "data")
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: pos-backend
+spec:
+  template:
+    metadata:
+      annotations:
+        # Target 10 in-flight-requests per pod.
+        autoscaling.knative.dev/target: "10"
+    spec:
+      containers:
+              - image: #@ data.values.image
+                ports:
+                - containerPort: 8080
+                env:
+                  - name: SPRING_PROFILES_ACTIVE
+                    value: #@ data.values.profile
+                  - name: MANAGEMENT_METRICS_EXPORT_WAVEFRONT_URI
+                    value: #@ data.values.wavefrontProxyUri
+                  - name: POS_STOREID
+                    value: "knative-retailer"
+                  - name: SPRING_RABBITMQ_HOST
+                    value: edge-pos-messaging.edge-data-services.svc.cluster.local
+                  - name: SPRING_RABBITMQ_PASSWORD
+                    value: #@ data.values.rabbitmq_password
+                  - name: SPRING_RABBITMQ_USER
+                    value: #@ data.values.rabbitmq_username
