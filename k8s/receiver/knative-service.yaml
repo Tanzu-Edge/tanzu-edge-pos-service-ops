@@ -7,7 +7,7 @@ spec:
   template:
     metadata:
       annotations:
-        # Target 10 in-flight-requests per pod.
+        #! Target 10 in-flight-requests per pod.
         autoscaling.knative.dev/target: "10"
     spec:
       containers:
