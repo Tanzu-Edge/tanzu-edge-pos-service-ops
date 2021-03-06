@@ -20,7 +20,7 @@ spec:
                   - name: MANAGEMENT_METRICS_EXPORT_WAVEFRONT_URI
                     value: #@ data.values.wavefrontProxyUri
                   - name: POS_STOREID
-                    value: "knative-retailer"
+                    value: #@ data.values.storeId
                   - name: SPRING_RABBITMQ_HOST
                     value: edge-pos-messaging.edge-data-services.svc.cluster.local
                   - name: SPRING_RABBITMQ_PASSWORD
