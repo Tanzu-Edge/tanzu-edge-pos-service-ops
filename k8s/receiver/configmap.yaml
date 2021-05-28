@@ -10,5 +10,5 @@ data:
   SPRING_RABBITMQ_USERNAME: #@ data.values.rabbitmq_username
   SPRING_DATASOURCE_USERNAME: #@ data.values.postgresql_username
   SPRING_DATASOURCE_PASSWORD: #@ data.values.postgresql_password
-  SPRING_DATASOURCE_URL: "jdbc:postgresql://yb-tservers.dc-data-services.svc.cluster.local:5433"
+  SPRING_DATASOURCE_URL: "jdbc:postgresql://yb-tservers.dc-data-services.svc.cluster.local:5433/yugabyte"
   MANAGEMENT_METRICS_EXPORT_WAVEFRONT_URI: #@ data.values.wavefrontProxyUri
