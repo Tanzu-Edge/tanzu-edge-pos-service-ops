@@ -6,6 +6,6 @@ ingressDomain: site-0.storm.pvd.pez.pivotal.io
 wavefrontProxyUri: proxy://wavefront-proxy-tanzu.tanzu-observability-saas:2878
 rabbitmq_password: replace_me
 rabbitmq_username: whoami
-postgresql_password: replace_me
-postgresql_username: whoami
+postgresql_password: yugabyte
+postgresql_username: yugabyte
 postgresql_host: dc-pos-sql.dc-data-services.svc.cluster.local
