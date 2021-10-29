@@ -36,4 +36,4 @@ spec:
   tags:
   - policymaker
   rabbitmqClusterReference:
-    name: eedge-pos-messaging
+    name: edge-pos-messaging
