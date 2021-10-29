@@ -26,3 +26,14 @@ spec:
       - rabbitmq_federation_management
     additionalConfig: |
       load_definitions = /path/to/exported/def.json # Path to the mounted definitions file
+---
+apiVersion: rabbitmq.com/v1beta1
+kind: User
+metadata:
+  name: pos-system-user
+  namespace: rabbitmq-system
+spec:
+  tags:
+  - policymaker
+  rabbitmqClusterReference:
+    name: eedge-pos-messaging
