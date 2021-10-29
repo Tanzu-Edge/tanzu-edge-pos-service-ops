@@ -40,3 +40,37 @@ spec:
   - monitoring
   rabbitmqClusterReference:
     name: edge-pos-messaging
+---
+apiVersion: rabbitmq.com/v1beta1
+kind: Vhost
+metadata:
+  name: in-store-vhost
+spec:
+  name: in-store-vhost # vhost name
+  rabbitmqClusterReference:
+    name: edge-pos-messaging # rabbitmqCluster must exist in the same namespace as this resource
+--
+apiVersion: rabbitmq.com/v1beta1
+kind: Binding
+metadata:
+  name: binding
+spec:
+  vhost: "/" # default to '/' if not provided
+  source: pos-exchange # an existing exchange
+  destination: pos-txns # an existing queue or exchange
+  destinationType: queue # can be 'queue' or 'exchange'
+  rabbitmqClusterReference:
+    name: edge-pos-messaging # rabbitmqCluster must exist in the same namespace as this resource
+--
+---
+apiVersion: rabbitmq.com/v1beta1
+kind: Queue
+metadata:
+  name: pos-txns
+spec:
+  name: pos-txns # name of the queue
+  vhost: "/" # default to '/' if not provided
+  autoDelete: false
+  durable: true # seting 'durable' to false means this queue won't survive a server restart
+  rabbitmqClusterReference:
+    name: edge-pos-messaging # rabbitmqCluster must exist in the same namespace as this resource
