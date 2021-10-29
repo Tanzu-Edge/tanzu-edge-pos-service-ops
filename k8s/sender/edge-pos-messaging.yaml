@@ -35,5 +35,8 @@ metadata:
 spec:
   tags:
   - policymaker
+  - administrator
+  - management
+  - monitoring
   rabbitmqClusterReference:
     name: edge-pos-messaging
