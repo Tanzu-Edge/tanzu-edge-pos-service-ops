@@ -25,5 +25,5 @@ spec:
                     value: edge-pos-messaging.edge-data-services.svc.cluster.local
                   - name: SPRING_RABBITMQ_PASSWORD
                     value: #@ data.values.rabbitmq_password
-                  - name: SPRING_RABBITMQ_USER
+                  - name: SPRING_RABBITMQ_USERNAME
                     value: #@ data.values.rabbitmq_username
