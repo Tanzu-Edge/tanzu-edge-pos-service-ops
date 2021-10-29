@@ -5,7 +5,7 @@ metadata:
 spec:
   replicas: 1
   service:
-    type: NodePort
+    type: LoadBalancer
   override:
     statefulSet:
       spec:
