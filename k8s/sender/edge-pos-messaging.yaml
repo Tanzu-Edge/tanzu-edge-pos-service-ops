@@ -49,7 +49,7 @@ spec:
   name: in-store-vhost # vhost name
   rabbitmqClusterReference:
     name: edge-pos-messaging # rabbitmqCluster must exist in the same namespace as this resource
---
+---
 apiVersion: rabbitmq.com/v1beta1
 kind: Binding
 metadata:
@@ -61,7 +61,6 @@ spec:
   destinationType: queue # can be 'queue' or 'exchange'
   rabbitmqClusterReference:
     name: edge-pos-messaging # rabbitmqCluster must exist in the same namespace as this resource
---
 ---
 apiVersion: rabbitmq.com/v1beta1
 kind: Queue
