@@ -41,6 +41,7 @@ spec:
   type: direct # default to 'direct' if not provided; can be set to 'direct', 'fanout', 'headers', and 'topic'
   autoDelete: false
   durable: true
+  vhost: in-store-vhost # default to '/' if not provided
   rabbitmqClusterReference:
     name: edge-pos-messaging 
 ---
