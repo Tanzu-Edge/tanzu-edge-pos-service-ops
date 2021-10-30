@@ -75,7 +75,8 @@ metadata:
   name: pos-permission
 spec:
   vhost: in-store-vhost
-  user: "pos-system" # name corresponds to the username we provided in "test-user-credentials" secret
+  userReference:
+    name: "pos-system"
   permissions:
     write: ".*"
     configure: ""
