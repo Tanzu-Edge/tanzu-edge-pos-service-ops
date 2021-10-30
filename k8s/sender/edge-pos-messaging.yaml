@@ -36,6 +36,18 @@ spec:
     name: edge-pos-messaging # rabbitmqCluster must exist in the same namespace as this resource
 ---
 apiVersion: rabbitmq.com/v1beta1
+kind: Exchange
+metadata:
+  name: pos-exchange
+spec:
+  name: pos-exchange # name of the exchange
+  type: direct # default to 'direct' if not provided; can be set to 'direct', 'fanout', 'headers', and 'topic'
+  autoDelete: false
+  durable: true
+  rabbitmqClusterReference:
+    name: edge-pos-messaging 
+---
+apiVersion: rabbitmq.com/v1beta1
 kind: Binding
 metadata:
   name: binding
