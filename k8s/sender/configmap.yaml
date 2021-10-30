@@ -9,4 +9,5 @@ data:
   SPRING_RABBITMQ_HOST: edge-pos-messaging.edge-data-services.svc.cluster.local
   SPRING_RABBITMQ_PASSWORD: #@ data.values.rabbitmq_password
   SPRING_RABBITMQ_USERNAME: #@ data.values.rabbitmq_username
+  SPRING_RABBITMQ_VIRTUALHOST: in-store-vhost
   MANAGEMENT_METRICS_EXPORT_WAVEFRONT_URI: #@ data.values.wavefrontProxyUri
