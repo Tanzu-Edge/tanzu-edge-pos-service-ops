@@ -27,3 +27,5 @@ spec:
                     value: #@ data.values.rabbitmq_password
                   - name: SPRING_RABBITMQ_USERNAME
                     value: #@ data.values.rabbitmq_username
+                  - name: SPRING_RABBITMQ_VIRTUALHOST
+                    value: in-store-vhost
