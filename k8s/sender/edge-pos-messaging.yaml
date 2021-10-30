@@ -64,7 +64,7 @@ kind: Permission
 metadata:
   name: pos-permission
 spec:
-  vhost: "in-store-vhost"
+  vhost: "/"
   user: "pos-system" # name corresponds to the username we provided in "test-user-credentials" secret
   permissions:
     write: ".*"
