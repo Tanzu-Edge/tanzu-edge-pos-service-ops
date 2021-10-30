@@ -19,10 +19,7 @@ metadata:
   namespace: edge-data-services
 spec:
   tags:
-  - policymaker
   - administrator
-  - management
-  - monitoring
   rabbitmqClusterReference:
     name: edge-pos-messaging
 ---
